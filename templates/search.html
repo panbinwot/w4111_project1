@@ -1,0 +1,70 @@
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+    <span class="navbar-brand mb-0 h1">Bear&Bins Graphics Cards Club</span>
+
+      <form action="search" method="POST" class="form-inline my-2 my-lg-0 mr-3 pull-right">
+        <input class="form-control mr-sm-2" type="search" placeholder="search" aria-label="search" name="search">
+
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+
+    <ul class="navbar-nav pull-right">
+      {% if current_user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('user', uid = current_user.id) }}">{{current_user.id}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('mainpage') }}">Main</a>
+        </li>       
+      {% else%}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('register') }}">SignUp</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+        </li> 
+      {% endif %}
+
+    </ul>
+    </div>
+  </nav>
+</head>
+
+<body >
+  <table  align="center" style="width:100%" >
+  	<tr>
+      <form align="center" >
+        <h1>Search Result: </h1>
+        {% if not x%} 
+          <div> Nothing Return. Plz try something else. </div>
+        {% else %}
+         
+          {% for n in data.items() %}
+          <div><a href="details?item_id={{n[0]}}"> {{n[0]}} </a> {{n[1]}} </div>
+          {% endfor %}
+       
+        {% endif %}
+      </form>
+  	</tr>
+  </table>
+</body>
+
+<a href="#" onClick=”javascript :history.back(-1);"> Go Back</a>
+<p><a href="/logout">Log Out </a></p>
+</html>

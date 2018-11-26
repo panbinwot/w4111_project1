@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+
+
+<h1 align="center">
+<p style="color:rgb(255,255,255);">Good Day! Welcome To XB Graphics Cards Club! Enjoy!</p>
+</h1>
+<h2 align="center" style="color:rgb(140,0,0);">Hi, {{message}}</h2>
+
+<table align="center">
+  <tr>
+    <td> 
+    <form style="color:rgb(255,255,255);">Advertisement $9.99/month</form>
+    </td>    
+    <td>
+      <form action="/login" method="POST">
+        <div class="login">
+          <div class="login-screen">
+            <div class="app-title">
+              <h1>Login</h1>
+            </div>
+       
+            <div class="login-form">
+              <div class="control-group">
+              <input type="text" class="login-field" value="" placeholder="username" name="username">
+              <label class="login-field-icon fui-user" for="login-name"></label>
+              </div>
+       
+              <div class="control-group">
+              <input type="password" class="login-field" value="" placeholder="password" name="password">
+              <label class="login-field-icon fui-lock" for="login-pass"></label>
+              </div>
+                      <input type="submit" value="Log in" class="btn btn-primary btn-large btn-block" >
+              <br>
+            </div>
+          </div>
+        </div>
+      </form> 
+    </td>
+
+    <td>
+      <form action="/register" method="POST">
+        <div class="register">
+          <div class="login-screen">
+            <div class="app-title">
+              <h1>Register</h1>
+            </div>
+            <div class="Register-form">
+              <div class="control-group">
+                <input type="text" class="login-field" value="" placeholder="your email" name="email">
+                <label class="login-field-icon fui-user" for="login-name"></label>
+              </div>
+              <div class="control-group">
+                <input type="password" class="login-field" value="" placeholder="your password" name="password">
+                <label class="login-field-icon fui-user" for="login-name"></label>
+              </div>
+              <div class="control-group">
+                <input type="phone" class="login-field" value="" placeholder="your phone" name="phone">
+                <label class="login-field-icon fui-user" for="login-name"></label>
+              </div>
+              <div class="control-group">
+                <input type="text" class="login-field" value="" placeholder="your address" name="address">
+                <label class="login-field-icon fui-user" for="login-name"></label>
+              </div>              
+              <div class="control-group">
+                <input type="text" class="login-field" value="" placeholder="your company or school" name="company">         
+                <label class="login-field-icon fui-lock" for="login-pass"></label>
+              </div>
+              <div class="control-group">
+                <input type="name" class="login-field" value="" placeholder="your name" name="name">         
+                <label class="login-field-icon fui-lock" for="login-pass"></label>
+              </div>
+                  <input type="submit" value="Join us" class="btn btn-primary btn-large btn-block" >
+              <br>
+            </div>
+          </div>
+        </div>
+      </form> 
+    </td>
+
+    <td> 
+      <div class="login">
+        <form style="color:rgb(255,255,255);">Advertisement $9.99/month</form>   
+      </div>
+      
+    </td>
+  </tr>
+</table>
+
+<div style="color:rgb(255,255,255);" >Sponsored By Gamazon, Gest Buy, GBay</div>
+
+</html> 

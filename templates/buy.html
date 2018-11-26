@@ -1,0 +1,97 @@
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+    <span class="navbar-brand mb-0 h1">Bear&Bins Graphics Cards Club</span>
+
+      <form action="search" method="POST" class="form-inline my-2 my-lg-0 mr-3 pull-right">
+        <input class="form-control mr-sm-2" type="search" placeholder="search" aria-label="search" name="search" >
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+
+    <ul class="navbar-nav pull-right">
+    {% if current_user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('user', uid = current_user.id) }}">{{current_user.id}}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('mainpage') }}">Main</a>
+      </li>       
+    {% else%}
+      <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('register') }}">SignUp</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+      </li> 
+    {% endif %}
+
+    </ul>
+    </div>
+  </nav>
+
+
+  <script language="javascript">
+function preview(oper){
+    if (oper < 10){
+    bdhtml=window.document.body.innerHTML;//获取当前页的html代码
+    sprnstr="<!--startprint"+oper+"-->";//设置打印开始区域
+    eprnstr="<!--endprint"+oper+"-->";//设置打印结束区域
+    prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html
+    prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html
+    window.document.body.innerHTML=prnhtml;
+    window.print();
+    window.document.body.innerHTML=bdhtml;
+    } 
+    else {
+        window.print();
+    }
+}
+</script>
+</head>
+<!--startprint1-->
+<body>
+<h1>This is your order information</h1>
+  <div>
+    <ul>
+      <li> Order ID: {{info.get('order')}}</li>
+      <li> Item ID:{{info.get('item_id')}} </li>
+      <li> Buy Time: {{info.get('t')}}</li>
+      <li> Price:{{info.get('price')}} </li>
+      <li> Buyer ID :{{current_user.id}}</li>
+      <li> Seller : {{info.get('sell_id')}}</li>
+      <li> Carrier : {{info.get('cid')}} {{info.get('carrier')}} </li>
+    </ul>
+  </div>
+</body>
+<!--endprint1-->
+
+<div>
+  <p><a href="{{ url_for('confirm',order = info.get('order'),uid = current_user.id, iid = info.get('item_id'),price = info.get('price'),sell_id = info.get('sell_id'),c_id = info.get('cid'))}}" > 
+  confirm order
+  </a></p>
+  <input type=button name='button_export' value='Print'  onclick=preview(1)>
+</div>
+
+<div>
+  <a href="#" onClick="javascript :history.back(-1);"> Go Back</a>
+<p><a href="/logout">Log Out </a></p>
+
+</div>
+
+
+</html>

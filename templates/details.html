@@ -1,0 +1,67 @@
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+    <span class="navbar-brand mb-0 h1">Bear&Bins Graphics Cards Club</span>
+
+      <form action="search" method="POST" class="form-inline my-2 my-lg-0 mr-3 pull-right">
+        <input class="form-control mr-sm-2" type="search" placeholder="search" aria-label="search" name="search" >
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+
+    <ul class="navbar-nav pull-right">
+    {% if current_user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('user', uid = current_user.id) }}">{{current_user.id}}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('mainpage') }}">Main</a>
+      </li>       
+    {% else%}
+      <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('register') }}">SignUp</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+      </li> 
+    {% endif %}
+
+    </ul>
+    </div>
+  </nav>
+</head>
+
+<body>
+	<h1>{{data.get('item_id')}}</h1>
+	<h2>See more details below.</h2>
+	<img class="irc_mi iDlHV4dbrOS4-pQOPx8XEepE" src="https://images-na.ssl-images-amazon.com/images/I/41ZezwNs0GL._AC_US218_.jpg" >
+    <div>
+      <ul>
+        <li> Model Name : {{data.get('model_name')}}</li>
+        <li> Memory : {{data.get('memory')}}</li>
+        <li> Clock Frequency : {{data.get('clock_freq')}}</li>
+        <li> TDP : {{data.get('tdp')}}</li>
+        <li> Owner : {{data.get('Owner')}}</li>
+        <li> Price : {{data.get('Price')}}</li>  
+        <li> OEM : {{data.get('OEM')}}</li>  
+      </ul>
+    </div>
+</body>
+<p><a href="{{ url_for('buy', iid = data.get('item_id'),uid = current_user.id)}}"> BUY </a></p>
+<a href="#" onClick="javascript :history.back(-1);"> Go Back</a>
+
+</html>

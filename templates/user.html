@@ -1,0 +1,117 @@
+<html>
+  <style>
+    body{ 
+      font-size: 15pt;
+      font-family: arial;
+    }
+  </style>
+
+<!-- <link rel="stylesheet" href="/static/style.css" type="text/css"> -->
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+    <span class="navbar-brand mb-0 h1">Bear&Bins Graphics Cards Club</span>
+
+      <form action="search" method="POST" class="form-inline my-2 my-lg-0 mr-3 pull-right">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="search" name="search" >
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+
+    <ul class="navbar-nav pull-right">
+    {% if current_user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('user', uid = current_user.id) }}">{{current_user.id}}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('mainpage') }}">Main</a>
+      </li>       
+    {% else%}
+      <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('register') }}">SignUp</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+      </li> 
+    {% endif %}
+
+    </ul>
+    </div>
+  </nav>
+</head>
+
+<body>
+  <table  align="center" style="width:100%" >
+    <tr>
+      <td>
+        <h1>  This is your login information</h1>
+        <h2>  Hi, # {{data.get('uid')}} member. </h2>
+            <div>
+              <ul>
+                <li> Phone : {{data.get('phone')}}</li>
+                <li> Email : {{data.get('email')}}</li>
+                <li> Address :{{data.get('address')}}</li>
+                <li> Company : {{data.get('company')}}</li>
+          		<li> Name : {{data.get('name')}}</li>
+              </ul>
+            </div>
+        <h3>Post your goods</h3>
+        <form action="/post" method="POST" class="form-inline my-2 my-lg-0 mr-3 pull-right">
+        	<div>
+        		<ul>
+        			<li> <input class="form-control mr-sm-2" type="text" placeholder="modelname" aria-label="modelname" name="modelname"> </li>
+        			<li> <input class="form-control mr-sm-2" type="text" placeholder="memory" aria-label="memory" name = "memory"> </li>
+        			<li> <input class="form-control mr-sm-2" type="text" placeholder="tdp" aria-label="tdp" name="tdp"> </li>
+              <li> <input class="form-control mr-sm-2" type="text" placeholder="clock_freq" aria-label="clock_freq" name="clock_freq"> </li>
+        			<li> <input class="form-control mr-sm-2" type="text" placeholder="OEM" aria-label="OEM" name="OEM" > </li>
+        			<li> <input class="form-control mr-sm-2" type="text" placeholder="price" aria-label="price" name="price" ></li>
+              <li> <input class="form-control mr-sm-2" type="text" placeholder="username" aria-label="username" name="username" ></li>
+        			<button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Post </button>			
+        		</ul>
+        	</div>
+        </form>
+      </td>
+       <td>   
+        <h3>Your Cards: </h3>
+          <h4>Your History of Selling</h4>
+          <div>Item ID&emsp;&ensp;To whom&emsp;&ensp;When</div>
+          {% for n in cards2.items() %}
+          <div> <a href="details?item_id={{n[0]}}"> {{n[0]}} </a>: &emsp;&emsp;&ensp;{{n[1][0]}} &emsp;&emsp;&ensp; {{n[1][1]}}&emsp;&emsp;&ensp;{{n[1][2]}} </div>
+        </div>
+          {% endfor %}
+         <div></div>
+          <h4>Your History of Buying</h4>
+          <div>Item ID&emsp;&ensp;From whom&emsp;&ensp;When</div>
+          {% for x in cards.items() %}
+          <div> <a href="details?item_id={{x[0]}}"> {{x[0]}} </a>: &emsp;&emsp;&ensp; {{x[1][0]}} &emsp;&emsp;&ensp; {{x[1][1]}}&emsp;&emsp;&ensp;{{x[1][2]}}</div>
+        </div>
+          {% endfor %}
+        <h3>Contact Service</h3>
+                <form action="/contact" method="POST" class="form-inline my-2 my-lg-0 mr-3 pull-right">
+          <div>
+            <ul>
+              <li> <input class="form-control mr-sm-2" type="text" placeholder="itemid" aria-label="itemid" name="itemid"> </li>
+              <li> <input class="form-control mr-sm-2" type="text" placeholder="details" aria-label="details" name="details"> </li>              
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Contact </button>      
+            </ul>
+          </div>
+        </form>
+      </td>
+  </tr>
+</table>
+
+
+
+<div>
+	<a href="#" onClick="javascript :history.back(-1);"> Go Back</a>
+	<p><a href="/logout">Log out </a></p>
+</div>
+</body>
+</html>
