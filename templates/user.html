@@ -72,7 +72,6 @@
               <li> <input class="form-control mr-sm-2" type="text" placeholder="clock_freq" aria-label="clock_freq" name="clock_freq"> </li>
         			<li> <input class="form-control mr-sm-2" type="text" placeholder="OEM" aria-label="OEM" name="OEM" > </li>
         			<li> <input class="form-control mr-sm-2" type="text" placeholder="price" aria-label="price" name="price" ></li>
-              <li> <input class="form-control mr-sm-2" type="text" placeholder="username" aria-label="username" name="username" ></li>
         			<button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Post </button>			
         		</ul>
         	</div>
@@ -80,17 +79,19 @@
       </td>
        <td>   
         <h3>Your Cards: </h3>
-          <h4>Your History of Selling</h4>
-          <div>Item ID&emsp;&ensp;To whom&emsp;&ensp;When</div>
+          <h4>Your History of Posting</h4>
+          <div>Item ID&emsp;&ensp;When</div>
           {% for n in cards2.items() %}
-          <div> <a href="details?item_id={{n[0]}}"> {{n[0]}} </a>: &emsp;&emsp;&ensp;{{n[1][0]}} &emsp;&emsp;&ensp; {{n[1][1]}}&emsp;&emsp;&ensp;{{n[1][2]}} </div>
+          <div> <a href="details?item_id={{n[0]}}"> {{n[0]}} </a>: &emsp;&emsp;&ensp; {{n[1][1]}}</div>
         </div>
           {% endfor %}
          <div></div>
           <h4>Your History of Buying</h4>
           <div>Item ID&emsp;&ensp;From whom&emsp;&ensp;When</div>
           {% for x in cards.items() %}
+          {% if x[1][0] != current_user.id%}
           <div> <a href="details?item_id={{x[0]}}"> {{x[0]}} </a>: &emsp;&emsp;&ensp; {{x[1][0]}} &emsp;&emsp;&ensp; {{x[1][1]}}&emsp;&emsp;&ensp;{{x[1][2]}}</div>
+          {% endif %}
         </div>
           {% endfor %}
         <h3>Contact Service</h3>

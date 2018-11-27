@@ -262,13 +262,13 @@ def post():
   oem = request.form['OEM']
   oid = 101
   price = request.form['price']
-  uid = request.form['username']
+  uid = flask_login.current_user.id
   t = time.strftime("%Y-%m-%d", time.localtime())
   info = (modelname,item_id,memory,clock_freq,tdp,uid,t,price,oid)
   g.conn.execute("""insert into graphiccard VALUES 
                 (%s,%s,%s,%s,%s,%s,%s,%s,%s);""",info)
 
-  return render_template('mainpage.html')
+  return redirect(url_for('mainpage'))
 
 @app.route('/confirm',methods=['POST','GET'])
 @flask_login.login_required
@@ -301,6 +301,7 @@ def contact():
   data = (uid,sid,t,details)
   g.conn.execute("""insert into ucontactservice VALUES (%s,%s,%s,%s);""",data)
   return redirect(url_for('mainpage'))
+
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
     app.run(debug=True,host='0.0.0.0', port=4000)
